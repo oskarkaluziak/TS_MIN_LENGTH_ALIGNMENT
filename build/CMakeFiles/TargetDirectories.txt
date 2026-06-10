@@ -1,0 +1,3 @@
+/Users/oskar/CLionProjects/zaawansprog/build/CMakeFiles/zaawansprog.dir
+/Users/oskar/CLionProjects/zaawansprog/build/CMakeFiles/edit_cache.dir
+/Users/oskar/CLionProjects/zaawansprog/build/CMakeFiles/rebuild_cache.dir

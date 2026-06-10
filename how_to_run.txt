@@ -1,0 +1,63 @@
+Instrukcja uruchomienia projektu
+Problem VII - MIN LENGTH ALIGNMENT (Tabu Search + GUI)
+
+Po sklonowaniu repozytorium uruchom w terminalu dwie poniższe komendy (w katalogu głównym projektu)
+Wymagania: Python 3.10+, CMake, C++, Tkinter
+
+
+WINDOWS (PowerShell lub cmd)
+
+Krok 1 - konfiguracja (jednorazowo):
+
+python -m venv .venv && .venv\Scripts\pip install -r requirements.txt && cmake -B build && cmake --build build --config Release && copy /Y build\Release\zaawansprog.exe tabu_search.exe
+
+Krok 2 - uruchomienie GUI:
+
+.venv\Scripts\python.exe generator_ui.py
+
+Jeśli krok 1 zakończy się błędem przy copy, zamiast niego ta pełna komenda:
+
+python -m venv .venv && .venv\Scripts\pip install -r requirements.txt && cmake -B build && cmake --build build --config Debug && copy /Y build\Debug\zaawansprog.exe tabu_search.exe
+
+(mam nadzieję, że zadziała, bo sam działam na macOS i nie miałem jak wytestować tego)
+
+
+
+macOS / Linux
+
+Krok 1 - konfiguracja (jednorazowo):
+
+python3 -m venv .venv && .venv/bin/pip install -r requirements.txt && cmake -B build && cmake --build build && cp build/zaawansprog tabu_search && chmod +x tabu_search
+
+Krok 2 - uruchomienie GUI:
+
+.venv/bin/python3 generator_ui.py
+
+
+
+Uwagi
+
+Po uruchomieniu GUI: wygenerować instancję, ustawić parametry Tabu Search,
+kliknąć „Uruchom obliczenia”. Wynik w oknie wyników oraz w pliku wynik.txt.
+
+Jeśli brak tabu_search - krok 1 nie zakończył się poprawnie.
+Jeśli brak matplotlib - uruchomić GUI przez python z .venv (krok 2), nie systemowy.
+
+Pliki: generator_ui.py (GUI), main.cpp (Tabu Search), instancja.txt (wejście), wynik.txt (wyjście).
+
+
+Zmiana kodu C++ (main.cpp)
+
+GUI uruchamia gotowy plik tabu_search / tabu_search.exe — po edycji main.cpp trzeba go przebudować.
+Najprościej wywołać g++ bezpośrednio (projekt to jeden plik źródłowy, bez zewnętrznych bibliotek):
+
+macOS / Linux:
+g++ -std=c++20 -O3 -pthread main.cpp -o tabu_search
+
+Windows (g++ z MinGW-w64 w PATH):git add .
+g++ -std=c++20 -O3 main.cpp -o tabu_search.exe
+
+Po pierwszym buildzie można też przebudować przez CMake:
+
+Windows:  cmake --build build --config Release && copy /Y build\Release\zaawansprog.exe tabu_search.exe
+macOS/Linux:  cmake --build build && cp build/zaawansprog tabu_search && chmod +x tabu_search
